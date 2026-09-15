@@ -1,0 +1,25 @@
+// Paleta de cores da loja
+
+// --- Cores Principais (Brand) ---
+$color-primary: #1C2833;        // Azul-marinho profundo (Header, botões primários)
+$color-primary-hover: #111A22;  // Estado hover para botões primários
+$color-secondary: #4A5D4E;      // Verde-oliva fechado (Tags de novidade, destaques)
+$color-terracotta: #B85B43;     // Terracota suave (Banners, callouts secundários)
+$color-copper: #B07D62;         // Cobre envelhecido (Metais, ícones, detalhes sutis)
+
+// --- Neutros e Superfícies (Backgrounds) ---
+$color-bg-main: #FBF9F5;        // Off-white quente (Fundo principal da loja)
+$color-bg-surface: #F2ECE4;     // Bege claro (Cards de produto, side cart, modais)
+$color-bg-subtle: #E8E0D5;      // Hover em cards e fundo de seções secundárias
+$color-border: #DFD7CD;         // Bordas finas, divisores e linhas organizadoras
+
+// --- Tipografia ---
+$color-text-main: #1A1C19;      // Grafite escuro / quase preto (Títulos e preços)
+$color-text-muted: #5C625B;     // Cinza terroso (Descrições, detalhes de modelo, parcelamento)
+$color-text-disabled: #A3A8A1;  // Cinza claro (Tamanhos esgotados, breadcrumbs)
+$color-text-inverse: #FFFFFF;   // Texto sobre fundos escuros e botões
+
+// --- Estados de UI & Feedback ---
+$color-status-sale: #A63A24;    // Vermelho queimado (Tags de promoção e "Sale")
+$color-status-success: #386641; // Verde (Confirmação de item na sacola, estoque disponível)
+$color-status-warning: #D97724; // Laranja (Poucas unidades em estoque)
