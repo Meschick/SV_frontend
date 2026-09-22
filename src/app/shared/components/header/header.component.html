@@ -1,0 +1,30 @@
+<header class="topbar">
+  <div class="brand-wrap">
+    <div class="brand-mark">SV</div>
+    <div class="brand-copy">
+      <span class="brand-name">StreetVibe</span>
+      <small>Essencialmente masculino</small>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    class="menu-toggle"
+    aria-label="Abrir menu"
+    [attr.aria-expanded]="isMenuOpen"
+    (click)="toggleMenu()"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav class="main-nav" [class.open]="isMenuOpen" aria-label="Menu principal">
+    <a *ngFor="let item of navItems" href="#" class="nav-item">{{ item }}</a>
+  </nav>
+
+  <div class="actions">
+    <button pButton type="button" class="p-button-text action-button" icon="pi pi-user" label="Entrar"></button>
+    <button pButton type="button" class="action-button" icon="pi pi-shopping-cart" label="Carrinho (2)" severity="secondary"></button>
+  </div>
+</header>
