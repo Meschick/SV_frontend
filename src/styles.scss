@@ -1,2 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
 @use './variables' as *;
+@import 'primeicons/primeicons.css';
+
+:root {
+  --text-color: #111111;
+  --surface-ground: #f5f1ea;
+  --surface-card: #ffffff;
+  --surface-border: rgba(17, 17, 17, 0.08);
+  --primary-color: #111111;
+  --primary-contrast-color: #ffffff;
+  --secondary-color: #d4af37;
+  --font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  background: #f3efe8;
+  color: var(--text-color);
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.page-content {
+  padding: 0;
+}
