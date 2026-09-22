@@ -1,0 +1,127 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 3rem 2rem 2rem;
+  background: #f5f1ea;
+}
+
+.hero-copy {
+  max-width: 620px;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: #8f6d1a;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.hero-copy h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+  color: #111111;
+}
+
+.subtitle {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #4a4a4a;
+}
+
+.cta-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 520px;
+}
+
+.product-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: 0 18px 36px rgba(17, 17, 17, 0.08);
+  overflow: hidden;
+}
+
+.product-card-large {
+  width: min(360px, 80%);
+  position: relative;
+}
+
+.product-card-small {
+  width: 240px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translateY(1.5rem);
+}
+
+.pill {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: #111111;
+  color: #fff;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.product-image {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.image-one {
+  background: linear-gradient(135deg, #b7b7b7, #4c4c4c 55%, #1d1d1d);
+}
+
+.image-two {
+  background: linear-gradient(135deg, #d8d2cc, #8a6d3d 55%, #34291d);
+}
+
+.product-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem 1.2rem;
+  font-size: 0.95rem;
+  color: #111111;
+}
+
+.product-meta strong {
+  font-weight: 700;
+}
+
+.product-meta span {
+  color: #8f6d1a;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    min-height: 420px;
+  }
+}
