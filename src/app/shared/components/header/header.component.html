@@ -7,24 +7,35 @@
     </div>
   </div>
 
-  <button
-    type="button"
-    class="menu-toggle"
-    aria-label="Abrir menu"
-    [attr.aria-expanded]="isMenuOpen"
-    (click)="toggleMenu()"
-  >
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-
   <nav class="main-nav" [class.open]="isMenuOpen" aria-label="Menu principal">
-    <a *ngFor="let item of navItems" href="#" class="nav-item">{{ item }}</a>
+    <a
+      *ngFor="let item of navItems"
+      [routerLink]="item.route"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+      class="nav-item"
+      (click)="isMenuOpen = false"
+    >
+      {{ item.label }}
+    </a>
   </nav>
 
-  <div class="actions">
-    <button pButton type="button" class="p-button-text action-button" icon="pi pi-user" label="Entrar"></button>
-    <button pButton type="button" class="action-button" icon="pi pi-shopping-cart" label="Carrinho (2)" severity="secondary"></button>
+  <div class="header-tools">
+    <div class="actions">
+      <button pButton type="button" class="p-button-text action-button" icon="pi pi-user" label="Entrar"></button>
+      <button pButton type="button" class="action-button" icon="pi pi-shopping-cart" label="Carrinho (2)" severity="secondary"></button>
+    </div>
+
+    <button
+      type="button"
+      class="menu-toggle"
+      aria-label="Abrir menu"
+      [attr.aria-expanded]="isMenuOpen"
+      (click)="toggleMenu()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </header>

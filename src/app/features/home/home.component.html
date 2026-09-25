@@ -1,0 +1,117 @@
+<section class="hero-section">
+  <div class="hero-copy">
+    <span class="eyebrow">Coleção premium</span>
+    <h1>Roupas masculinas que combinam presença e conforto.</h1>
+    <p>
+      Descubra peças pensadas para o dia a dia, composições sofisticadas e looks que elevam sua rotina com confiança.
+    </p>
+
+    <div class="hero-actions">
+      <button pButton type="button" label="Comprar agora" class="primary-btn" routerLink="/catalog"></button>
+      <button pButton type="button" label="Ver coleção" class="secondary-btn" severity="secondary" routerLink="/catalog"></button>
+    </div>
+
+    <div class="hero-metrics">
+      <div>
+        <strong>25k+</strong>
+        <span>Clientes</span>
+      </div>
+      <div>
+        <strong>4.9/5</strong>
+        <span>Avaliação</span>
+      </div>
+      <div>
+        <strong>180+</strong>
+        <span>Produtos</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual" aria-label="Visual da coleção masculina">
+    <div class="visual-card card-main">
+      <span class="tag">Novo</span>
+      <div class="image image-main"></div>
+      <div class="product-meta">
+        <strong>Jaqueta Urban</strong>
+        <span>R$ 399,90</span>
+      </div>
+    </div>
+
+    <div class="visual-card card-mini">
+      <div class="image image-mini"></div>
+      <div class="product-meta">
+        <strong>Calça Slim</strong>
+        <span>R$ 219,90</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="highlights">
+  <div class="highlight-item" *ngFor="let item of highlights">
+    <i [class]="item.icon"></i>
+    <div>
+      <strong>{{ item.title }}</strong>
+      <p>{{ item.text }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow dark">Navegue por estilo</span>
+      <h2>Encontre sua identidade</h2>
+    </div>
+    <a href="#" class="link-more">Ver tudo</a>
+  </div>
+
+  <div class="categories-grid">
+    <article class="category-card" *ngFor="let category of categories">
+      <div class="icon-wrap">
+        <i [class]="category.icon"></i>
+      </div>
+      <h3>{{ category.name }}</h3>
+      <p>{{ category.label }}</p>
+    </article>
+  </div>
+</section>
+
+<section class="promo-banner">
+  <div>
+    <span>Oferta especial</span>
+    <h3>Até 40% off em peças essenciais.</h3>
+  </div>
+  <button pButton type="button" label="Explorar ofertas" class="primary-btn banner-btn"></button>
+</section>
+
+<section class="featured-products">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow dark">Mais vendidos</span>
+      <h2>Seleção do momento</h2>
+    </div>
+    <a href="#" class="link-more">Ver coleção</a>
+  </div>
+
+  <div class="product-grid">
+    <article class="product-card" *ngFor="let product of products">
+      <div class="product-image product-image-{{ product.tone }}">
+        <span class="product-tag">{{ product.tag }}</span>
+      </div>
+      <div class="product-info">
+        <div class="product-label-row">
+          <span>StreetVibe</span>
+          <button type="button" aria-label="Adicionar ao carrinho" class="cart-small">
+            <i class="pi pi-shopping-cart"></i>
+          </button>
+        </div>
+        <h3>{{ product.name }}</h3>
+        <div class="product-price-row">
+          <strong>{{ product.price }}</strong>
+          <span>4.8</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
