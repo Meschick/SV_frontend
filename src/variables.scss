@@ -1,25 +1,59 @@
-// Paleta de cores da loja
+// Design tokens da loja (SCSS). Os valores também são expostos como CSS custom properties em styles.scss.
 
-// --- Cores Principais (Brand) ---
-$color-primary: #1C2833;        // Azul-marinho profundo (Header, botões primários)
-$color-primary-hover: #111A22;  // Estado hover para botões primários
-$color-secondary: #4A5D4E;      // Verde-oliva fechado (Tags de novidade, destaques)
-$color-terracotta: #B85B43;     // Terracota suave (Banners, callouts secundários)
-$color-copper: #B07D62;         // Cobre envelhecido (Metais, ícones, detalhes sutis)
+// --- Cores Principais (Brand MK Store, extraídas da logo) ---
+$color-primary: #0E1A33;        // Azul-marinho profundo (fundo da logo: header, botões, footer)
+$color-primary-hover: #08101F;  // Estado hover para botões primários
+$color-secondary: #1F3A6E;      // Azul royal (anel interno da logo: destaques secundários)
+$color-gold: #C9A24A;           // Dourado (coroa e "K": detalhes sobre fundo escuro, selos)
+$color-gold-light: #E3C77A;     // Dourado claro (brilhos e hovers sobre fundo escuro)
+$color-gold-text: #8A6A1F;      // Dourado escuro (texto dourado legível sobre fundo claro)
 
 // --- Neutros e Superfícies (Backgrounds) ---
-$color-bg-main: #FBF9F5;        // Off-white quente (Fundo principal da loja)
-$color-bg-surface: #F2ECE4;     // Bege claro (Cards de produto, side cart, modais)
-$color-bg-subtle: #E8E0D5;      // Hover em cards e fundo de seções secundárias
-$color-border: #DFD7CD;         // Bordas finas, divisores e linhas organizadoras
+$color-bg-main: #FAF8F4;        // Marfim (fundo principal da loja)
+$color-bg-surface: #F2EEE6;     // Marfim mais quente (faixas, cards, modais)
+$color-bg-subtle: #E7E1D5;      // Hover em cards e fundo de seções secundárias
+$color-border: #DED7C9;         // Bordas finas, divisores e linhas organizadoras
 
 // --- Tipografia ---
-$color-text-main: #1A1C19;      // Grafite escuro / quase preto (Títulos e preços)
-$color-text-muted: #5C625B;     // Cinza terroso (Descrições, detalhes de modelo, parcelamento)
-$color-text-disabled: #A3A8A1;  // Cinza claro (Tamanhos esgotados, breadcrumbs)
+$color-text-main: #0F1626;      // Azul quase preto (títulos e preços)
+$color-text-muted: #5A6172;     // Cinza azulado (descrições, parcelamento)
+$color-text-disabled: #A2A7B3;  // Cinza claro (tamanhos esgotados, preço antigo)
 $color-text-inverse: #FFFFFF;   // Texto sobre fundos escuros e botões
 
 // --- Estados de UI & Feedback ---
 $color-status-sale: #A63A24;    // Vermelho queimado (Tags de promoção e "Sale")
 $color-status-success: #386641; // Verde (Confirmação de item na sacola, estoque disponível)
 $color-status-warning: #D97724; // Laranja (Poucas unidades em estoque)
+
+// --- Fontes ---
+$font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+$font-display: 'Fraunces', Georgia, serif;
+
+// --- Layout ---
+$container-max: 1320px;
+$gutter: clamp(1rem, 4vw, 2.5rem);
+$header-height: 116px; // barra principal + linha do mega menu (desktop)
+
+// --- Raios ---
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 20px;
+
+// --- Sombras ---
+$shadow-sm: 0 1px 2px rgba(26, 28, 25, 0.06);
+$shadow-md: 0 8px 24px -8px rgba(26, 28, 25, 0.14);
+$shadow-lg: 0 24px 48px -16px rgba(26, 28, 25, 0.22);
+
+// --- Motion ---
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+// --- Breakpoints ---
+$bp-sm: 560px;
+$bp-md: 860px;
+$bp-lg: 1100px;
+
+@mixin down($bp) {
+  @media (max-width: $bp) {
+    @content;
+  }
+}
