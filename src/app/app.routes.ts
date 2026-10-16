@@ -1,16 +1,24 @@
 import { Routes } from '@angular/router';
 
-import { HomeComponent } from './features/home/home.component';
-import { CatalogComponent } from './features/produtos/pages/catalog/catalog.component';
+const productList = () =>
+  import('./features/produtos/pages/product-list/product-list.component').then((m) => m.ProductListComponent);
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    loadComponent: () => import('./features/home/home.component').then((m) => m.HomeComponent)
+  },
+  {
+    path: 'produtos',
+    loadComponent: productList
+  },
+  {
+    path: 'produtos/:tipo',
+    loadComponent: productList
   },
   {
     path: 'catalog',
-    component: CatalogComponent
+    redirectTo: 'produtos'
   },
   {
     path: '**',
