@@ -1,0 +1,156 @@
+@use '../../../../variables' as *;
+
+.footer {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  background: var(--color-primary);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+}
+
+.newsletter {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 440px);
+  align-items: center;
+  gap: 2rem;
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    color: var(--text-inverse);
+  }
+
+  p {
+    margin-top: 0.5rem;
+  }
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+
+  input {
+    flex: 1;
+    min-width: 0;
+    height: 3rem;
+    padding: 0 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-inverse);
+    outline: none;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:focus {
+      border-color: var(--color-gold);
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(3, 1fr);
+  gap: 2rem;
+  padding-block: clamp(2.5rem, 5vw, 3.5rem);
+
+  @include down($bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include down($bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.brand-col p {
+  margin-top: 1rem;
+  max-width: 32ch;
+}
+
+.brand-col .tagline {
+  margin-top: 0.85rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.social {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+
+  a {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      background: var(--text-inverse);
+      color: var(--color-primary);
+    }
+  }
+}
+
+h3 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-inverse);
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+ul a {
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--text-inverse);
+  }
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.78rem;
+}
+
+.payments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+
+  span {
+    padding: 0.2rem 0.55rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+}
