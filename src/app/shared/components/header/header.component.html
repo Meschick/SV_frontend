@@ -1,41 +1,62 @@
-<header class="topbar">
-  <div class="brand-wrap">
-    <div class="brand-mark">SV</div>
-    <div class="brand-copy">
-      <span class="brand-name">StreetVibe</span>
-      <small>Essencialmente masculino</small>
-    </div>
-  </div>
+<div class="announcement">
+  <p>Frete grátis acima de R$ 299 <span>·</span> Troca em até 30 dias</p>
+</div>
 
-  <nav class="main-nav" [class.open]="isMenuOpen" aria-label="Menu principal">
-    <a
-      *ngFor="let item of navItems"
-      [routerLink]="item.route"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: item.route === '/' }"
-      class="nav-item"
-      (click)="isMenuOpen = false"
-    >
-      {{ item.label }}
-    </a>
-  </nav>
-
-  <div class="header-tools">
-    <div class="actions">
-      <button pButton type="button" class="p-button-text action-button" icon="pi pi-user" label="Entrar"></button>
-      <button pButton type="button" class="action-button" icon="pi pi-shopping-cart" label="Carrinho (2)" severity="secondary"></button>
-    </div>
-
-    <button
-      type="button"
-      class="menu-toggle"
-      aria-label="Abrir menu"
-      [attr.aria-expanded]="isMenuOpen"
-      (click)="toggleMenu()"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
+<header class="topbar" [class.scrolled]="isScrolled">
+  <div class="container topbar-inner">
+    <button type="button" class="icon-btn menu-toggle" aria-label="Abrir menu" (click)="isMenuOpen.set(true)">
+      <i class="pi pi-bars"></i>
     </button>
+
+    <a routerLink="/" class="brand" aria-label="MK Store, página inicial">
+      <span class="brand-mk">M<span>K</span></span>
+      <span class="brand-store">Store</span>
+    </a>
+
+    <form class="search" role="search" (submit)="$event.preventDefault(); search(searchInput.value)">
+      <i class="pi pi-search"></i>
+      <input #searchInput type="search" placeholder="O que você está procurando?" aria-label="Buscar produtos" />
+    </form>
+
+    <div class="actions">
+      <button type="button" class="icon-btn hide-sm" aria-label="Minha conta">
+        <i class="pi pi-user"></i>
+      </button>
+      <button type="button" class="icon-btn hide-sm" aria-label="Favoritos">
+        <i class="pi pi-heart"></i>
+      </button>
+      <button type="button" class="icon-btn" [attr.aria-label]="'Sacola, ' + cartCount + ' itens'">
+        <i class="pi pi-shopping-bag"></i>
+        <span class="cart-count" *ngIf="cartCount > 0">{{ cartCount }}</span>
+      </button>
+    </div>
   </div>
+
+  <nav class="mega-nav" aria-label="Produtos">
+    <div class="container">
+      <p-megamenu [model]="megaMenuItems()" breakpoint="0px" styleClass="mk-megamenu"></p-megamenu>
+    </div>
+  </nav>
 </header>
+
+<p-drawer
+  [visible]="isMenuOpen()"
+  (visibleChange)="isMenuOpen.set($event)"
+  position="left"
+  styleClass="mobile-menu"
+>
+  <ng-template pTemplate="header">
+    <span class="brand">
+      <span class="brand-mk">M<span>K</span></span>
+      <span class="brand-store">Store</span>
+    </span>
+  </ng-template>
+
+  <form class="search drawer-search" role="search" (submit)="$event.preventDefault(); search(drawerSearch.value)">
+    <i class="pi pi-search"></i>
+    <input #drawerSearch type="search" placeholder="Buscar produtos" aria-label="Buscar produtos" />
+  </form>
+
+  <a routerLink="/produtos" class="drawer-link" (click)="isMenuOpen.set(false)">Todos os produtos</a>
+  <p-panelmenu [model]="mobileMenuItems()" [multiple]="false" styleClass="mk-panelmenu"></p-panelmenu>
+</p-drawer>
