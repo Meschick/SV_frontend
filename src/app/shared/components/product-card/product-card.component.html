@@ -1,0 +1,38 @@
+<article class="card">
+  <div class="media" [style.background]="product.image">
+    <span class="monogram" aria-hidden="true">{{ product.brand.charAt(0) }}</span>
+
+    <div class="badges">
+      <span class="badge" *ngIf="product.tag">{{ product.tag }}</span>
+      <span class="badge badge-sale" *ngIf="discount">-{{ discount }}%</span>
+    </div>
+
+    <button type="button" class="icon-btn wishlist" [attr.aria-label]="'Favoritar ' + product.name">
+      <i class="pi pi-heart"></i>
+    </button>
+
+    <button type="button" class="btn btn-primary btn-sm quick-add" aria-label="Adicionar à sacola">
+      <i class="pi pi-shopping-bag"></i>
+      <span class="quick-add-label">Adicionar à sacola</span>
+    </button>
+  </div>
+
+  <div class="info">
+    <div class="meta">
+      <span>{{ product.brand }}</span>
+      <span class="rating"><i class="pi pi-star-fill"></i>{{ product.rating | number: '1.1-1' }}</span>
+    </div>
+
+    <h3>{{ product.name }}</h3>
+
+    <div class="price">
+      <strong>{{ product.price | currency }}</strong>
+      <s *ngIf="product.oldPrice">{{ product.oldPrice | currency }}</s>
+    </div>
+    <small class="installment">ou 6x de {{ installment | currency }} sem juros</small>
+
+    <div class="colors" [attr.aria-label]="'Cores: ' + colorNames">
+      <span *ngFor="let color of product.colors" class="swatch" [title]="color.name" [style.background]="color.hex"></span>
+    </div>
+  </div>
+</article>
