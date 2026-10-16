@@ -1,0 +1,86 @@
+<details class="group" open *ngIf="!query.type && types.length">
+  <summary>Tipo de produto</summary>
+  <ul class="links">
+    <li *ngFor="let type of types">
+      <a [routerLink]="['/produtos', type.slug]">{{ type.name }}</a>
+    </li>
+  </ul>
+</details>
+
+<details class="group" open *ngIf="options.categories.length">
+  <summary>
+    Categoria
+    <span class="selected-count" *ngIf="selectedCount('categories')">{{ selectedCount('categories') }}</span>
+  </summary>
+  <ul class="checks">
+    <li *ngFor="let option of options.categories; let i = index" [class.empty]="!option.count">
+      <p-checkbox
+        [binary]="true"
+        [inputId]="idPrefix + '-cat-' + i"
+        [ngModel]="isSelected('categories', option.value)"
+        (onChange)="toggle.emit({ key: 'categories', value: option.value })"
+      ></p-checkbox>
+      <label [for]="idPrefix + '-cat-' + i">{{ option.value }}</label>
+      <span class="count">{{ option.count }}</span>
+    </li>
+  </ul>
+</details>
+
+<details class="group" open>
+  <summary>
+    Marca
+    <span class="selected-count" *ngIf="selectedCount('brands')">{{ selectedCount('brands') }}</span>
+  </summary>
+  <ul class="checks">
+    <li *ngFor="let option of options.brands; let i = index">
+      <p-checkbox
+        [binary]="true"
+        [inputId]="idPrefix + '-brand-' + i"
+        [ngModel]="isSelected('brands', option.value)"
+        (onChange)="toggle.emit({ key: 'brands', value: option.value })"
+      ></p-checkbox>
+      <label [for]="idPrefix + '-brand-' + i">{{ option.value }}</label>
+      <span class="count">{{ option.count }}</span>
+    </li>
+  </ul>
+</details>
+
+<details class="group" open>
+  <summary>
+    Cor
+    <span class="selected-count" *ngIf="selectedCount('colors')">{{ selectedCount('colors') }}</span>
+  </summary>
+  <div class="swatches">
+    <button
+      *ngFor="let option of options.colors"
+      type="button"
+      class="swatch"
+      [class.selected]="isSelected('colors', option.value)"
+      [attr.aria-pressed]="isSelected('colors', option.value)"
+      [title]="option.value + ' (' + option.count + ')'"
+      (click)="toggle.emit({ key: 'colors', value: option.value })"
+    >
+      <span class="dot" [style.background]="option.hex"></span>
+      <span class="swatch-label">{{ option.value }}</span>
+    </button>
+  </div>
+</details>
+
+<details class="group" open>
+  <summary>
+    Tamanho
+    <span class="selected-count" *ngIf="selectedCount('sizes')">{{ selectedCount('sizes') }}</span>
+  </summary>
+  <div class="sizes">
+    <button
+      *ngFor="let option of options.sizes"
+      type="button"
+      class="size"
+      [class.selected]="isSelected('sizes', option.value)"
+      [attr.aria-pressed]="isSelected('sizes', option.value)"
+      (click)="toggle.emit({ key: 'sizes', value: option.value })"
+    >
+      {{ option.value }}
+    </button>
+  </div>
+</details>

@@ -1,0 +1,282 @@
+@use '../../../../../variables' as *;
+
+:host {
+  display: block;
+}
+
+// ---------- Topo ----------
+
+.list-hero {
+  padding-block: clamp(1.75rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+
+  h1 {
+    margin-top: 1rem;
+    font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+  }
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+
+  a:hover {
+    color: var(--text-main);
+  }
+
+  .pi {
+    font-size: 0.65rem;
+    color: var(--text-disabled);
+  }
+
+  > span:last-child {
+    color: var(--text-main);
+  }
+}
+
+.quick-categories {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.quick-chip {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-main);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+
+  &:hover {
+    border-color: var(--text-main);
+  }
+
+  &.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--text-inverse);
+  }
+}
+
+// ---------- Corpo ----------
+
+.list-body {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-top: 2rem;
+
+  @include down($bp-md) {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 1.25rem;
+  }
+}
+
+.sidebar {
+  align-self: start;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filters-btn {
+  display: none;
+
+  @include down($bp-md) {
+    display: inline-flex;
+  }
+
+  .badge {
+    padding: 0.15rem 0.45rem;
+  }
+}
+
+.count {
+  margin-right: auto;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.sort {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+  padding-left: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--text-inverse);
+
+  &:focus-within {
+    border-color: var(--text-main);
+  }
+
+  span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  select {
+    height: 100%;
+    padding: 0 2.25rem 0 0.5rem;
+    border: none;
+    background: transparent;
+    outline: none;
+    appearance: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .pi {
+    position: absolute;
+    right: 0.85rem;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  @include down($bp-sm) {
+    span {
+      display: none;
+    }
+  }
+}
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.active-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.75rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--bg-subtle);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: var(--border);
+  }
+
+  .pi {
+    font-size: 0.6rem;
+  }
+}
+
+.clear-all {
+  border: none;
+  background: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.75rem, 3vw, 2.5rem) clamp(1rem, 2vw, 1.5rem);
+  transition: opacity 0.2s;
+
+  &.refreshing {
+    opacity: 0.55;
+  }
+
+  @include down($bp-lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+// ---------- Estados ----------
+
+.skeleton-media,
+.skeleton-line {
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, var(--bg-surface) 25%, var(--bg-subtle) 50%, var(--bg-surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite linear;
+}
+
+.skeleton-media {
+  aspect-ratio: 4 / 5;
+}
+
+.skeleton-line {
+  height: 0.85rem;
+  margin-top: 0.85rem;
+  border-radius: 4px;
+
+  &.short {
+    width: 45%;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 4rem 1rem;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+
+  > .pi {
+    font-size: 1.5rem;
+    color: var(--text-disabled);
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+}
+
+// ---------- Drawer (mobile) ----------
+
+.drawer-actions {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0.5rem;
+}

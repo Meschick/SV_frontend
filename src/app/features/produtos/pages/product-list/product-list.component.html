@@ -1,0 +1,137 @@
+<section class="list-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a routerLink="/">Início</a>
+      <i class="pi pi-angle-right"></i>
+      <a routerLink="/produtos" *ngIf="currentType(); else allCrumb">Produtos</a>
+      <ng-template #allCrumb><span>Produtos</span></ng-template>
+      <ng-container *ngIf="currentType() as type">
+        <i class="pi pi-angle-right"></i>
+        <span>{{ type.name }}</span>
+      </ng-container>
+    </nav>
+
+    <h1 class="display">{{ title() }}</h1>
+
+    <!-- Acesso rápido às categorias do tipo atual -->
+    <div class="quick-categories" *ngIf="currentType() as type">
+      <a
+        *ngFor="let category of type.categories"
+        class="quick-chip"
+        [class.active]="query().categories.includes(category)"
+        [routerLink]="['/produtos', type.slug]"
+        [queryParams]="{ categoria: category }"
+      >
+        {{ category }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="container list-body">
+  <aside class="sidebar" aria-label="Filtros">
+    <app-product-filters
+      idPrefix="side"
+      [options]="filterOptions()"
+      [query]="query()"
+      [types]="types()"
+      (toggle)="toggleFilter($event)"
+    ></app-product-filters>
+  </aside>
+
+  <div class="results">
+    <div class="toolbar">
+      <button type="button" class="btn btn-outline btn-sm filters-btn" (click)="filtersOpen.set(true)">
+        <i class="pi pi-sliders-h"></i>
+        Filtros
+        <span class="badge badge-dark" *ngIf="activeFilters().length">{{ activeFilters().length }}</span>
+      </button>
+
+      <p class="count" aria-live="polite">
+        <ng-container *ngIf="products() as list">
+          {{ list.length }} {{ list.length === 1 ? 'produto' : 'produtos' }}
+        </ng-container>
+      </p>
+
+      <label class="sort">
+        <span>Ordenar por</span>
+        <select [value]="query().sort" (change)="setSort($any($event.target).value)">
+          <option *ngFor="let option of sortOptions" [value]="option.value">{{ option.label }}</option>
+        </select>
+        <i class="pi pi-chevron-down"></i>
+      </label>
+    </div>
+
+    <div class="active-filters" *ngIf="activeFilters().length">
+      <button
+        *ngFor="let filter of activeFilters()"
+        type="button"
+        class="active-chip"
+        (click)="removeFilter(filter)"
+        [attr.aria-label]="'Remover filtro ' + filter.value"
+      >
+        {{ filter.key === 'search' ? '“' + filter.value + '”' : filter.value }}
+        <i class="pi pi-times"></i>
+      </button>
+      <button type="button" class="clear-all" (click)="clearFilters()">Limpar tudo</button>
+    </div>
+
+    <!-- Carregamento inicial -->
+    <div class="product-grid" *ngIf="products() === null">
+      <div class="skeleton" *ngFor="let item of skeletons">
+        <div class="skeleton-media"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line short"></div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="products() as list">
+      <div class="product-grid" [class.refreshing]="loading()" *ngIf="list.length; else empty">
+        <app-product-card *ngFor="let product of list; trackBy: trackById" [product]="product"></app-product-card>
+      </div>
+    </ng-container>
+
+    <ng-template #empty>
+      <div class="empty">
+        <i class="pi" [class.pi-search]="!typeNotFound()" [class.pi-exclamation-circle]="typeNotFound()"></i>
+        <h2>{{ typeNotFound() ? 'Página não encontrada' : 'Nenhum produto encontrado' }}</h2>
+        <p>
+          {{
+            typeNotFound()
+              ? 'Esse tipo de produto não existe. Que tal ver toda a coleção?'
+              : 'Tente remover alguns filtros ou buscar por outro termo.'
+          }}
+        </p>
+        <a *ngIf="typeNotFound(); else clearBtn" routerLink="/produtos" class="btn btn-outline btn-sm">Ver todos os produtos</a>
+        <ng-template #clearBtn>
+          <button type="button" class="btn btn-outline btn-sm" (click)="clearFilters()">Limpar filtros</button>
+        </ng-template>
+      </div>
+    </ng-template>
+  </div>
+</section>
+
+<p-drawer
+  [visible]="filtersOpen()"
+  (visibleChange)="filtersOpen.set($event)"
+  position="left"
+  header="Filtros"
+  styleClass="filters-drawer"
+>
+  <app-product-filters
+    idPrefix="drawer"
+    [options]="filterOptions()"
+    [query]="query()"
+    [types]="types()"
+    (toggle)="toggleFilter($event)"
+  ></app-product-filters>
+
+  <ng-template pTemplate="footer">
+    <div class="drawer-actions">
+      <button type="button" class="btn btn-outline btn-sm" (click)="clearFilters()">Limpar</button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="filtersOpen.set(false)">
+        Ver {{ products()?.length ?? 0 }} produtos
+      </button>
+    </div>
+  </ng-template>
+</p-drawer>
